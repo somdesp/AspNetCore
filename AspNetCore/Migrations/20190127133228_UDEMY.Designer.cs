@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspNetCore.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20190122230943_AspNetCore")]
-    partial class AspNetCore
+    [Migration("20190127133228_UDEMY")]
+    partial class UDEMY
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -70,6 +70,37 @@ namespace AspNetCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Produtos");
+                });
+
+            modelBuilder.Entity("AspNetCore.Model.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DataCad");
+
+                    b.Property<DateTime>("DataNasci");
+
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("Login")
+                        .IsRequired();
+
+                    b.Property<string>("Nome")
+                        .IsRequired();
+
+                    b.Property<string>("RGM")
+                        .IsRequired();
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuario");
                 });
 
             modelBuilder.Entity("AspNetCore.Model.ItemPedido", b =>

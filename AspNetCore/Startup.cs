@@ -25,19 +25,34 @@ namespace AspNetCore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowMyOrigin",
+                    builder => builder.AllowAnyOrigin());
+            });
+
             var sqlConnection = _configuration.GetConnectionString("dbConnection");
             services.AddDbContext<Contexto>(options =>
                 options.UseSqlServer(sqlConnection, b => b.MigrationsAssembly("AspNetCore")));
 
             services.AddMvc();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+      
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseCors("AllowMyOrigin");
+
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
+            app.UseCors(option => option.AllowAnyOrigin()); ;
+
+
+            app.UseMvc();
         }
     }
 }

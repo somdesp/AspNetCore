@@ -78,7 +78,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app.component */ "./ClientApp/app/app.component.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _loja_listaProduto_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./loja/listaProduto.component */ "./ClientApp/app/loja/listaProduto.component.ts");
@@ -86,6 +86,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+//import { HttpClientModule } from "@angular/common/http"
 
 
 
@@ -103,7 +104,7 @@ var AppModule = /** @class */ (function () {
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_5__["RouterModule"].forRoot([], { useHash: true, enableTracing: true }),
-                _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"]
+                _angular_http__WEBPACK_IMPORTED_MODULE_3__["HttpModule"]
             ],
             providers: [_services_dataService__WEBPACK_IMPORTED_MODULE_7__["DataService"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_4__["AppComponent"]]
@@ -123,7 +124,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ul>\r\n    <li *ngFor=\"let p of produtos\">{{p.nome}}  R${{p.preco}}</li>\r\n</ul>"
+module.exports = "<div class=\"col-xs-9\" *ngFor=\"let p of produtos\">\r\n\r\n\r\n    \r\n            <div>{{p.nome}} </div>\r\n            <div class=\"\">\r\n                R${{p.preco}}\r\n            </div>\r\n    \r\n    \r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -152,9 +153,7 @@ var ListaProduto = /** @class */ (function () {
     ListaProduto.prototype.ngOnInit = function () {
         var _this = this;
         this.data.carregarProdutos()
-            .subscribe(function (success) {
-            _this.produtos = _this.data.produtos;
-        });
+            .subscribe(function () { return _this.produtos = _this.data.produtos; });
     };
     ListaProduto = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -181,7 +180,7 @@ var ListaProduto = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DataService", function() { return DataService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var rxjs_add_operator_map__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/add/operator/map */ "./node_modules/rxjs-compat/_esm5/add/operator/map.js");
 
@@ -196,14 +195,11 @@ var DataService = /** @class */ (function () {
     DataService.prototype.carregarProdutos = function () {
         var _this = this;
         return this.http.get("api/produto/ListarProdutos")
-            .map(function (data) {
-            _this.produtos = data;
-            return true;
-        });
+            .map(function (result) { return _this.produtos = result.json(); });
     };
     DataService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Injectable"])(),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"]])
     ], DataService);
     return DataService;
 }());

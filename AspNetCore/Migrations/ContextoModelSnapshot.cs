@@ -70,6 +70,37 @@ namespace AspNetCore.Migrations
                     b.ToTable("Produtos");
                 });
 
+            modelBuilder.Entity("AspNetCore.Model.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DataCad");
+
+                    b.Property<DateTime>("DataNasci");
+
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("Login")
+                        .IsRequired();
+
+                    b.Property<string>("Nome")
+                        .IsRequired();
+
+                    b.Property<string>("RGM")
+                        .IsRequired();
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuario");
+                });
+
             modelBuilder.Entity("AspNetCore.Model.ItemPedido", b =>
                 {
                     b.HasOne("AspNetCore.Model.Pedido")

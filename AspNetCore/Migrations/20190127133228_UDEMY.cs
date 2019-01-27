@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AspNetCore.Migrations
 {
-    public partial class AspNetCore : Migration
+    public partial class UDEMY : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,6 +34,25 @@ namespace AspNetCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Produtos", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Usuario",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Nome = table.Column<string>(nullable: false),
+                    Login = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    RGM = table.Column<string>(nullable: false),
+                    DataNasci = table.Column<DateTime>(nullable: false),
+                    Senha = table.Column<string>(maxLength: 10, nullable: false),
+                    DataCad = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Usuario", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -78,6 +97,9 @@ namespace AspNetCore.Migrations
         {
             migrationBuilder.DropTable(
                 name: "ItemPedidos");
+
+            migrationBuilder.DropTable(
+                name: "Usuario");
 
             migrationBuilder.DropTable(
                 name: "Pedidos");
