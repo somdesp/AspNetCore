@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore;
 using AspNetCore.Model;
 
@@ -9,8 +9,9 @@ namespace AspNetCore.Data
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<ItemPedido> ItemPedidos { get; set; }
         public DbSet<Pedido> Pedidos { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
 
-        public Contexto(DbContextOptions<Contexto> options) : base(options)
+    public Contexto(DbContextOptions<Contexto> options) : base(options)
         {
 
         }
@@ -20,8 +21,9 @@ namespace AspNetCore.Data
             modelBuilder.Entity<Produto>().HasKey(p => p.Id);
             modelBuilder.Entity<ItemPedido>().HasKey(p => p.Id);
             modelBuilder.Entity<Pedido>().HasKey(p => p.Id);
+            modelBuilder.Entity<Usuario>().HasKey(p => p.Id);
 
-            base.OnModelCreating(modelBuilder);
+      base.OnModelCreating(modelBuilder);
         }
 
         public bool SaveChanges()
