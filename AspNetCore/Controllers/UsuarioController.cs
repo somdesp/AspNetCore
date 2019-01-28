@@ -37,7 +37,7 @@ namespace AspNetCore.Controllers
       }
 
       [HttpGet]
-      public IActionResult ObterProdutoId(int id)
+      public IActionResult ObterUsuarioId(int id)
       {
         try
         {
@@ -52,12 +52,12 @@ namespace AspNetCore.Controllers
       }
 
       [HttpPost]
-      public IActionResult InserirProduto(Usuario usuario)
+      public IActionResult InserirUsuario(Usuario usuario)
       {
         try
         {
         _usuarioRepository.InserirUsuario(usuario);
-          return Created("/api/produto/", usuario);
+          return Created("/api/usuario/ObterUsuarioId", usuario);
         }
         catch (Exception e)
         {
