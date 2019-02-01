@@ -52,10 +52,11 @@ namespace AspNetCore.Controllers
       }
 
       [HttpPost]
-      public IActionResult InserirUsuario(Usuario usuario)
+      public IActionResult InserirUsuario([FromBody]Usuario usuario)
       {
         try
         {
+          usuario.DataCad = DateTime.Now;
         _usuarioRepository.InserirUsuario(usuario);
           return Created("/api/usuario/ObterUsuarioId", usuario);
         }
